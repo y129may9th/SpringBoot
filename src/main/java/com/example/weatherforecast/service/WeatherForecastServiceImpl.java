@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+@Service
 public class WeatherForecastServiceImpl implements WeatherForecastService {
 
     private final String WEATHER_URL = "http://weather.livedoor.com/forecast/webservice/json/v1?city={cityId}";

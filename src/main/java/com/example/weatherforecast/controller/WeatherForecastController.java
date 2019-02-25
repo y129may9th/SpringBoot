@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,18 +15,18 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 // 演習3-1 コントローラのBean定義をしよう
 @Controller
-public class WeatherController {
+public class WeatherForecastController {
 
     // 演習6-1 WeatherServiceをコンストラクタインジェクションしよう
     private final WeatherForecastService weatherForecastService;
 
     @Autowired
-    public WeatherController(WeatherForecastService weatherService) {
-        this.weatherForecastService = weatherService;
+    public WeatherForecastController(WeatherForecastService weatherForecastService) {
+        this.weatherForecastService = weatherForecastService;
     }
 
     // 演習3-2 リクエストマッピングの設定をしよう
-    @RequestMapping(value = "/weather", method = GET)
+    @GetMapping(value = "/weather")
     public String getWeather(Model model, @RequestParam(name = "city", defaultValue = "tokyo") String city) throws Exception {
         WeatherForecast weatherForecast = weatherForecastService.getWeather(city);
         model.addAttribute("title", weatherForecast.getTitle());
